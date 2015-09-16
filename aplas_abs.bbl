@@ -1,0 +1,91 @@
+\begin{thebibliography}{10}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Heine and Lam(2003)]{DBLP:conf/pldi/HeineL03}
+D.~L. Heine and M.~S. Lam.
+\newblock A practical flow-sensitive and context-sensitive {C} and {C++} memory
+  leak detector.
+\newblock In R.~Cytron and R.~Gupta, editors, \emph{PLDI}, pages 168--181. ACM,
+  2003.
+\newblock ISBN 1-58113-662-5.
+
+\bibitem[Honda et~al.(1998)Honda, Vasconcelos, and
+  Kubo]{DBLP:conf/esop/HondaVK98}
+K.~Honda, V.~T. Vasconcelos, and M.~Kubo.
+\newblock Language primitives and type discipline for structured
+  communication-based programming.
+\newblock In C.~Hankin, editor, \emph{{ESOP} 1998}, volume 1381 of
+  \emph{Lecture Notes in Computer Science}, pages 122--138. Springer, 1998.
+\newblock ISBN 3-540-64302-8.
+\newblock \doi{10.1007/BFb0053567}.
+\newblock URL \url{http://dx.doi.org/10.1007/BFb0053567}.
+
+\bibitem[Igarashi and Kobayashi(2004)]{DBLP:journals/tcs/IgarashiK04}
+A.~Igarashi and N.~Kobayashi.
+\newblock A generic type system for the pi-calculus.
+\newblock \emph{Theor. Comput. Sci.}, 311\penalty0 (1-3):\penalty0 121--163,
+  2004.
+
+\bibitem[Kobayashi et~al.(2006)Kobayashi, Suenaga, and
+  Wischik]{DBLP:journals/lmcs/KobayashiSW06}
+N.~Kobayashi, K.~Suenaga, and L.~Wischik.
+\newblock Resource usage analysis for the \(\pi\)-calculus.
+\newblock \emph{Logical Methods in Computer Science}, 2\penalty0 (3), 2006.
+
+\bibitem[Orlovich and Rugina(2006)]{DBLP:conf/sas/OrlovichR06}
+M.~Orlovich and R.~Rugina.
+\newblock Memory leak analysis by contradiction.
+\newblock In K.~Yi, editor, \emph{Static Analysis, 13th International
+  Symposium, {SAS} 2006, Seoul, Korea, August 29-31, 2006, Proceedings}, volume
+  4134 of \emph{Lecture Notes in Computer Science}, pages 405--424. Springer,
+  2006.
+\newblock ISBN 3-540-37756-5.
+\newblock \doi{10.1007/11823230_26}.
+\newblock URL \url{http://dx.doi.org/10.1007/11823230_26}.
+
+\bibitem[Suenaga and Kobayashi(2009)]{DBLP:conf/aplas/SuenagaK09}
+K.~Suenaga and N.~Kobayashi.
+\newblock Fractional ownerships for safe memory deallocation.
+\newblock In Z.~Hu, editor, \emph{APLAS}, volume 5904 of \emph{Lecture Notes in
+  Computer Science}, pages 128--143. Springer, 2009.
+\newblock ISBN 978-3-642-10671-2.
+
+\bibitem[Sui et~al.(2012)Sui, Ye, and Xue]{DBLP:conf/issta/SuiYX12}
+Y.~Sui, D.~Ye, and J.~Xue.
+\newblock Static memory leak detection using full-sparse value-flow analysis.
+\newblock In M.~P.~E. Heimdahl and Z.~Su, editors, \emph{International
+  Symposium on Software Testing and Analysis, {ISSTA} 2012, Minneapolis, MN,
+  USA, July 15-20, 2012}, pages 254--264. {ACM}, 2012.
+\newblock ISBN 978-1-4503-1454-1.
+\newblock \doi{10.1145/2338965.2336784}.
+\newblock URL \url{http://doi.acm.org/10.1145/2338965.2336784}.
+
+\bibitem[Swamy et~al.(2006)Swamy, Hicks, Morrisett, Grossman, and
+  Jim]{DBLP:journals/scp/SwamyHMGJ06}
+N.~Swamy, M.~W. Hicks, G.~Morrisett, D.~Grossman, and T.~Jim.
+\newblock Safe manual memory management in cyclone.
+\newblock \emph{Sci. Comput. Program.}, 62\penalty0 (2):\penalty0 122--144,
+  2006.
+
+\bibitem[Vieira et~al.(2008)Vieira, Caires, and
+  Seco]{DBLP:conf/esop/VieiraCS08}
+H.~T. Vieira, L.~Caires, and J.~C. Seco.
+\newblock The conversation calculus: {A} model of service-oriented computation.
+\newblock In S.~Drossopoulou, editor, \emph{{ESOP} 2008}, volume 4960 of
+  \emph{Lecture Notes in Computer Science}, pages 269--283. Springer, 2008.
+\newblock ISBN 978-3-540-78738-9.
+\newblock \doi{10.1007/978-3-540-78739-6_21}.
+\newblock URL \url{http://dx.doi.org/10.1007/978-3-540-78739-6_21}.
+
+\bibitem[Xie and Aiken(2005)]{DBLP:conf/sigsoft/XieA05}
+Y.~Xie and A.~Aiken.
+\newblock Context- and path-sensitive memory leak detection.
+\newblock In M.~Wermelinger and H.~Gall, editors, \emph{ESEC/SIGSOFT FSE},
+  pages 115--125. ACM, 2005.
+\newblock ISBN 1-59593-014-0.
+
+\end{thebibliography}
