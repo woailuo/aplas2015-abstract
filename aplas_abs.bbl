@@ -1,9 +1,15 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{11}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Beyer and Keremoglu(2011)]{beyer2011cpachecker}
+D.~Beyer and M.~E. Keremoglu.
+\newblock Cpachecker: A tool for configurable software verification.
+\newblock In \emph{Computer Aided Verification}, pages 184--190. Springer,
+  2011.
 
 \bibitem[Heine and Lam(2003)]{DBLP:conf/pldi/HeineL03}
 D.~L. Heine and M.~S. Lam.
