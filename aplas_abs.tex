@@ -200,11 +200,8 @@ The type {\bf 0} is the behavior "does nothing"; $P_{1};P_{2}$ is for
 sequential execution; $P_{1}+P_{2}$ is for choice; $\Malloc$ is the
 behavior of a program that allocates a memory cell exactly once;
 $\Free$ is for deallocating exactly once; $\mu\alpha.P$ is the
-recursive type.  For example , the body of the function $f$ has the
-type $\mu\alpha.\Malloc;\Free;\alpha$ and the body of $g$ has
-$\mu\alpha.\Malloc;\alpha;\Free$.  The semantics of behavioral types
-is given by a labeled transition system, which is omitted in this
-abstract.
+recursive type.  The semantics of behavioral types is given by a
+labeled transition system, which is omitted in this abstract.
 
 The type judgment of our type system is of the form $\Theta;\Gamma\vdash s :
 P$.  It reads "under environments \(\Theta\) and  \(\Gamma\) the behavior
