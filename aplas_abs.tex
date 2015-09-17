@@ -273,9 +273,9 @@ abstracted behavior of original one.
 
 In Figure~\ref{figexp}, the result of verification \(Success\) and
 \(Fail\) represent a program consumes bounded or unbounded number of
-memory respectively. It shows that our type system is too imprecise to
+memory respectively. It shows that our behavioral type system is too imprecise to
 verify total memory-leak freedom of the programs. The reason is that
-our method is not path-sensitive. One typical example is as follows.
+our method is not path-sensitive. Figure~\ref{ex:fail} show you this situation.
 \begin{figure}[h]
 \begin{verbatim}
 while (...) {
@@ -290,11 +290,11 @@ while (...) {
 \label{ex:fail}
 \end{figure}
 
-The abstracted behavioral type of above program is
-\(\mu\alpha. (\mathbf{0} + \Malloc); (\mathbf{0} + \Free); \alpha\)
-which is not enough to check no-memory-leak, although it is
-memory-leak free if the condition \(c\) does not change between the
-allocation and deallocation.
+Above program is memory-leak free if the condition \(c\) is not
+changed between allocation and deallocation primitives. However, the
+abstracted behavioral type of above program is
+\(\mu\alpha. (\mathbf{0} + \Malloc); (\mathbf{0} + \Free); \alpha\),
+which is not enough to verify memory-leak freedom.
 
 We have checked many of source codes from Github and Linux kernel and
 found that extending our behavioral type system with dependencies is
