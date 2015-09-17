@@ -90,14 +90,14 @@ memory cells, many static verification techniques have been
 proposed~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06,DBLP:conf/sas/OrlovichR06,DBLP:conf/issta/SuiYX12}.
 These analyses proposed so far mainly guarantee \emph{partial}
 memory-leak freedom: All the allocated memory cells are deallocated
-\emph{if a program terminates}.  We say a program is \emph{total}
-memory-leak free if it consumes bounded number of memory cells during
-execution.
+\emph{if a program terminates}.  Hence, these proposed verifiers will
+say that a nonterminating program is safe.
 
-In real-world programs, total memory-leak freedom is an important
-property (e.g., operating system and Web servers). However, analyses
-for partial memory-leak freedom is not enough for such software that
-does not terminate.
+In real-world programs, \emph{total} memory-leak freedom -- if a
+program consumes bounded number of memory cells during execution -- is
+an important property (e.g., operating system and Web
+servers). However, analyses for partial memory-leak freedom is not
+enough for such software that does not terminate.
 
 \begin{exmp}\label{ex:ex1}
 \begin{figure}[h]
@@ -110,15 +110,16 @@ does not terminate.
 \end{figure}
 Figure~\ref{ex:np} describes partial and total memory-leak freedom.
 Both \(h\) and \(h'\) are partially memory-leak free because they do
-not terminate.  The function \(h\) is totally memory-leak free since
-it consumes at most two cells\footnote{We assume that \(\MALLOC\)
+not terminate. The function \(h\) is totally memory-leak free since it
+consumes at most two cells\footnote{We assume that \(\MALLOC\)
   allocates a fixed-sized block}.  However, the function \(h'\), when
 it is invoked, consumes unbounded number of memory cells; hence \(h'\)
 is not totally memory-leak free, which may cause overflow.
 \end{exmp}
 
-Currently, we want to guarantee, total memory-leak freedom, that a
-program consumes bounded number of memory cells during execution.
+Currently, we are investigating a static verification method to prove,
+total memory-leak freedom, that a program consumes bounded number of
+memory cells during execution.
 
 \section{Approach}
 Our method is to abstract the behavior of programs by a
@@ -155,8 +156,8 @@ is a sublanguage of Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09}.
 \begin{array}{rlcl}
   s & (\mbox{statements})&::=&\SKIP \tB s_{1};s_{2} \tB *x \leftarrow y \tB \Free \Cirx \\
   & & & \tB \LET\; x = \MALLOC \; \IN \; s  \\
-  & & & \tB \LET x = y \; \IN s \tB \LET x = \NULL \; \IN s \\
-  & & & \tB \LET x = *y  \; \IN s \\
+  %% & & & \tB \LET x = y \; \IN s \tB \LET x = \NULL \; \IN s \\
+  %% & & & \tB \LET x = *y  \; \IN s \\
   & &  & \tB f(\vec{x}) \tB \IFNULL(x) \; \THEN s_{1}\; \ELSE s_{2} \\
 \end{array}
 \]
@@ -175,15 +176,27 @@ is a sublanguage of Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09}.
 The command $\SKIP$ does nothing; the sequence $s_{1};s_{2}$ means the
 executing order of $s_{1}$ and $s_{2}$; \(*x \leftarrow y\) updates
 the content of cell pointed by \(x\) with the value \(y\); command
-$\Free\Cirx$ deallocates the memory cell through the pointer $x$; the
-command \(\MALLOC\) allocates a memory cell; \(*y\) dereferences a
-pointer \(y\); \(\LET x = e \; \IN s\) first binds \(x\) to the value of
-\(e\), and then executes \(s\); $f(\vec{x})$ means a function call
-which receives some parameters. Here $\vec{x}$ represents a sequence
-of variables \(\{x_1,...,x_n\}\);
-\(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\) executes \(s_1\) if \(x\) is
-\(\NULL\), otherwise \(s_2\).  For simplification, we omit definitions
-for function, program and variables.
+$\Free\Cirx$ deallocates the memory cell through the pointer $x$;
+\(\LET x = \MALLOC \; \IN s\) allocates a cell pointed by \(x\) and
+then executes \(s\); $f(\vec{x})$ means a function call which receives
+some parameters. Here $\vec{x}$ represents a sequence of variables
+\(\{x_1,...,x_n\}\); \(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\) executes
+\(s_1\) if \(x\) is \(\NULL\), otherwise \(s_2\). We omit some
+commands like dereferenciinig a pointer, let bindings and definitions
+of variables, program and so on.
+
+%% The command $\SKIP$ does nothing; the sequence $s_{1};s_{2}$ means the
+%% executing order of $s_{1}$ and $s_{2}$; \(*x \leftarrow y\) updates
+%% the content of cell pointed by \(x\) with the value \(y\); command
+%% $\Free\Cirx$ deallocates the memory cell through the pointer $x$; the
+%% command \(\MALLOC\) allocates a memory cell; \(*y\) dereferences a
+%% pointer \(y\); \(\LET x = e \; \IN s\) first binds \(x\) to the value of
+%% \(e\), and then executes \(s\); $f(\vec{x})$ means a function call
+%% which receives some parameters. Here $\vec{x}$ represents a sequence
+%% of variables \(\{x_1,...,x_n\}\);
+%% \(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\) executes \(s_1\) if \(x\) is
+%% \(\NULL\), otherwise \(s_2\).  For simplification, we omit definitions
+%% for function, program and variables.
 
 A program \emph{leaks} memory if the program consumes unbounded number
 of memory cells.  For example, see Figure~\ref{ex:np} again, \(h\)
@@ -248,18 +261,100 @@ behavior of \(s\).
 To check feasibility of our behavioral type system for verification of
 total memory-leak freedom and investigate problems in current type
 system framework, we apply CPAChecker~\cite{beyer2011cpachecker} (1)
-to the original program and (2) to the program which represents the
+to an original program and (2) to a program which represents the
 abstracted behavior of original one.
 
 \begin{figure}[!hbp]
 \centering
 \includegraphics[width=0.5\textwidth]{exp.png} 
-\caption{Verification of total memory-leak free}\label{figexp} 
+\caption{Verification of total memory-leak free}
+\label{figexp} 
 \end{figure}
 
-In Figure~\ref{figexp}, the result of verification \(Success\)
-represents a program consumes bounded number of memory, while \(Fail\)
-represents a program consumes unbounded number of memory cells.
+In Figure~\ref{figexp}, the result of verification \(Success\) and
+\(Fail\) represent a program consumes bounded or unbounded number of
+memory respectively. It shows that our type system is too imprecise to
+verify total memory-leak freedom of the programs. The reason is that
+our method is not path-sensitive. One typical example is as follows.
+\begin{figure}[h]
+\begin{verbatim}
+while (...) {
+   if(\* some condition c *\) {
+      x = malloc(sizeof(int));}
+  /* Do something */
+  if (/* condition equivalent to c  */) {
+    free(x); }
+}
+\end{verbatim}
+\caption{Success by CPAChecker but Fail by our aproach}
+\label{ex:fail}
+\end{figure}
+
+The abstracted behavioral type of above program is
+\(\mu\alpha. (\mathbf{0} + \Malloc); (\mathbf{0} + \Free); \alpha\)
+which is not enough to check no-memory-leak, although it is
+memory-leak free if the condition \(c\) does not change between the
+allocation and deallocation.
+
+We have checked many of source codes from Github and Linux kernel and
+found that extending our behavioral type system with dependencies is
+useful for our future work.
+
+\begin{figure}[h]
+  \[
+  \begin{array}{rlcl}
+  P &  &::=& \ldots \\
+  & & &\tB \mbox{CASE(x) \{VAL\_1 : $P_1$; \ldots ; VAL\_n: $P_n$  \}}\\
+\end{array}
+\]
+\caption{Extension to dependent types}
+\label{ex:beh}
+\end{figure}
+
+Figure~\ref{ex:beh} shows that extending current behavioral type
+system with dependent types. By using this dependent type, the
+behavior type of program in Figure~\ref{ex:fail} is
+\(\mu\alpha. \mbox{CASE(c)} \{ \mbox{VAL\_1} : \Malloc; \mbox{VAL\_2}:
+0 \}; \mbox{CASE(c)}\{ \mbox{VAL\_1} : \Free; \mbox{VAL\_2}: 0 \};
+\alpha\), which is able to check no-memory-leak.
+
+\section{Related Works}
+Many static verification methods have been
+proposed~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06,DBLP:conf/sas/OrlovichR06,DBLP:conf/issta/SuiYX12}
+for memory-leak freedom. These methods guarantee partial memory-leak
+freedom and no illegal accesses to deallocated cells, whereas our
+behavioral type system guarantees total memory-leak freedom. By using
+both their methods and our type system, we can guarantee
+safe-memory-deallocation even for nonterminationg programs.
+
+Behavioral types are extensively studied in the context of concurrent
+program
+verification~\cite{DBLP:conf/esop/HondaVK98,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/VieiraCS08,DBLP:journals/lmcs/KobayashiSW06}.
+Our type system is largely inspired by one proposed by Kobayashi et
+al.~\cite{DBLP:journals/lmcs/KobayashiSW06}, which guarantees that a
+concurrent program accesses resources according to specification.
+
+\section{Conclusion}
+To verify memory-leak freedom for possibly nonterminating programs, we
+have proposed a behavioral type system which abstracts the behavior of
+programs with allocation and deallocation. Although we omitted the
+statement and proofs, we have proved the type soundness and conducted
+experiments to check feasibility of our approach.
+
+The allocation primitives defined in our type system ignore the size
+of the allocated block for simplification.  Hence, our approach may
+see a memory-leak program as a well-typed one.  Variable-length cells
+will be included in our future work.  Another feature should be
+considered is path-sensitive, because our behavioral type system is
+not enough to check memory-leak freedom. For preciseness, we are going
+to extend our type system with dependencies.
+
+
+\bibliographystyle{abbrvnat}
+\bibliography{tan}
+
+\end{document}
+
 
 %% \Begin{table}
 %%   \scriptsize
@@ -281,69 +376,3 @@ represents a program consumes unbounded number of memory cells.
 %% \caption{Result of whether the program is total memory-leak free}
 %% \label{tb:mcc}
 %% \end{table}
-
-\subsection{Preciseness}
-Figure~\ref{figexp} shows that our type system is too imprecise to verify total
-memory-leak freedom of the programs.
-
-The reason is that our method is not path-sensitive, and it simply
-rejects the programs which allocate cells before recursive calls. We
-have checked many of source codes from Github and Linux kernel and
-found that extending our behavioral type system with dependencies is
-useful for our future work.
-
-\begin{figure}[h]
-  \[
-  \begin{array}{rlcl}
-  P &  &::=& \ldots \\
-  & & &\tB \mbox{CASE(x) \{VALUE\_1 : $P_1$; \ldots ; VALUE\_n: $P_n$  \}}\\
-\end{array}
-\]
-
-\caption{Extension to dependent types}
-\label{ex:beh}
-\end{figure}
-
-Figure~\ref{ex:beh} shows that extending current behavioral type
-system with dependent types. 
-
-
-
-\section{Related Works}
-Many static verification methods have been
-proposed~\cite{DBLP:conf/aplas/SuenagaK09,DBLP:conf/pldi/HeineL03,DBLP:conf/sigsoft/XieA05,DBLP:journals/scp/SwamyHMGJ06,DBLP:conf/sas/OrlovichR06,DBLP:conf/issta/SuiYX12}
-for memory-leak freedom. These methods guarantee partial memory-leak
-freedom and no illegal accesses to deallocated cells, whereas our
-behavioral type system guarantees total memory-leak freedom. By using
-both their methods and our type system, we can guarantee
-safe-memory-deallocation even for nonterminationg programs.
-
-Behavioral types are extensively studied in the context of concurrent
-program
-verification~\cite{DBLP:conf/esop/HondaVK98,DBLP:journals/tcs/IgarashiK04,DBLP:conf/esop/VieiraCS08,DBLP:journals/lmcs/KobayashiSW06}.
-Our type system is largely inspired by one proposed by Kobayashi et
-al.~\cite{DBLP:journals/lmcs/KobayashiSW06}, which guarantees that a
-concurrent program accesses resources according to specification.
-
-\section{Conclusion}
-To verify memory-leak freedom for possibly nonterminating programs, we
-have proposed a behavioral type system which abstracts the behavior of
-programs with allocation and deallocation. We have proved the type
-soundness and conducted experiments to check feasibility of our
-approach.
-
-The allocation primitives defined in our type system ignore the size
-of the allocated block for simplification.  Hence, our approach may
-see a memory-leak program as a well-typed one.  Variable-length cells
-will be included in our future work.  Another feature should be
-considered is path-sensitive, because our behavioral type system is
-not enough to check memory-leak freedom. For preciseness, we are going
-to extend our type system with dependencies.
-
-
-\bibliographystyle{abbrvnat}
-\bibliography{tan}
-
-\end{document}
-
-

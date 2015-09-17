@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  16 SEP 2015 16:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.6)  17 SEP 2015 12:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -303,12 +303,12 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 104.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (31.13144pt too wide) detected at line 204
+Overfull \hbox (31.13144pt too wide) detected at line 217
 []
  []
 
 
-Overfull \hbox (4.31638pt too wide) in paragraph at lines 206--217
+Overfull \hbox (4.31638pt too wide) in paragraph at lines 219--230
 \OT1/ptm/m/n/9 Fig-ure 1[], func-tion $\OML/cmm/m/it/9 h$ \OT1/ptm/m/n/9 has th
 e type $\OML/cmm/m/it/9 ^^V:[]\OT1/cmr/m/n/9 ;  [];  [];  [];  \OML/cmm/m/it/9
  $\OT1/ptm/m/n/9 ;
@@ -323,36 +323,34 @@ Non-PDF special ignored!
 File: exp.png Graphic file (type png)
 
 <use exp.png>
-Package pdftex.def Info: exp.png used on input line 256.
+Package pdftex.def Info: exp.png used on input line 269.
 (pdftex.def)             Requested size: 252.0pt x 69.29208pt.
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 256--257
+Overfull \hbox (12.0pt too wide) in paragraph at lines 269--270
  [][] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 299.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 307.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 299.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 307.
 
-Overfull \hbox (1.66753pt too wide) detected at line 301
-[]
- []
+(./aplas_abs.bbl [2 <./exp.png>]) [3
 
-(./aplas_abs.bbl) [2 <./exp.png>] (./aplas_abs.aux)
+] (./aplas_abs.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 3774 strings out of 493315
- 48946 string characters out of 6137905
- 128045 words of memory out of 5000000
- 7133 multiletter control sequences out of 15000+600000
- 26242 words of font info for 61 fonts, out of 8000000 for 9000
+ 3777 strings out of 493315
+ 48974 string characters out of 6137905
+ 128053 words of memory out of 5000000
+ 7135 multiletter control sequences out of 15000+600000
+ 26409 words of font info for 62 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  37i,9n,35p,235b,291s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
@@ -368,13 +366,14 @@ ist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2013/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2013/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2013/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2013/texmf-dist/font
-s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/ur
-w/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/ut
-mri8a.pfb>
-Output written on aplas_abs.pdf (2 pages, 231261 bytes).
+s/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2013/texmf-dist/fonts/
+type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/
+times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr
+i8a.pfb>
+Output written on aplas_abs.pdf (3 pages, 244333 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
- 52 compressed objects within 1 object stream
+ 80 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
