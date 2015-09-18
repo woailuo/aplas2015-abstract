@@ -118,8 +118,8 @@ is not totally memory-leak free, which may cause overflow.
 \end{exmp}
 
 Currently, we are investigating a static verification method to prove
-total memory-leak freedom, that a program consumes bounded number of
-memory cells during execution.
+total memory-leak freedom which means a program consumes bounded
+number of memory cells during execution.
 
 \section{Approach}
 Our method is to abstract the behavior of programs by a
@@ -173,17 +173,17 @@ is a sublanguage of Suenaga and Kobayashi~\cite{DBLP:conf/aplas/SuenagaK09}.
 %%   P \mbox{ (programs)} &::=& \langle D, s \rangle\\
 %% \end{eqnarray*}
 
-The command $\SKIP$ does nothing; the sequence $s_{1};s_{2}$ means the
-executing order of $s_{1}$ and $s_{2}$; \(*x \leftarrow y\) updates
-the content of cell pointed to by \(x\) with the value \(y\); command
-$\Free\Cirx$ deallocates the memory cell through the pointer $x$;
-\(\LET x = \MALLOC \; \IN s\) allocates a cell pointed to by \(x\) and
-then executes \(s\); $f(\vec{x})$ means a function call which receives
-some parameters. Here $\vec{x}$ represents a sequence of variables
-\(x_1,...,x_n\); \(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\) executes
-\(s_1\) if \(x\) is \(\NULL\), otherwise \(s_2\). We omit some
-commands like dereferencing a pointer, let bindings and definitions
-of variables, program and so on.
+The command $\SKIP$ does nothing; the sequence $s_{1};s_{2}$ means a
+sequential execution of $s_{1}$ and $s_{2}$; \(*x \leftarrow y\)
+updates the content of cell pointed to by \(x\) with the value \(y\);
+command $\Free\Cirx$ deallocates the memory cell through the pointer
+$x$; \(\LET x = \MALLOC \; \IN s\) allocates a cell pointed to by
+\(x\) and then executes \(s\); $f(\vec{x})$ means a function call
+which receives some parameters. Here $\vec{x}$ represents a sequence
+of variables \(x_1,...,x_n\); \(\IFNULL(x)\ \THEN\ s_1\ \ELSE\ s_2\)
+executes \(s_1\) if \(x\) is \(\NULL\), otherwise \(s_2\). We omit
+some commands like dereferencing a pointer, let bindings and
+definitions of variables, program and so on.
 
 %% The command $\SKIP$ does nothing; the sequence $s_{1};s_{2}$ means the
 %% executing order of $s_{1}$ and $s_{2}$; \(*x \leftarrow y\) updates
@@ -225,7 +225,7 @@ the type
 \(\mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\Free\TSEQ\Free\TSEQ\alpha\);
 function \(h'\) has the type
 \(\mu\alpha.\Malloc\TSEQ\Malloc\TSEQ\alpha\TSEQ\Free\TSEQ\Free\).  The
-semantics of behavioral types is given by a labeled transition system
+semantic of behavioral types is given by a labeled transition system
 like \(P\xlongrightarrow{l} P'\) where \(l \in \{\Malloc, \Free\}\). We
 omit the concrete definition.
 
@@ -262,8 +262,8 @@ behavior of \(s\).
 To check feasibility of our behavioral type system for verification of
 total memory-leak freedom and investigate problems in the current type
 system, we apply CPAChecker~\cite{beyer2011cpachecker} to an original
-program and to a program which represents the abstracted behavior
-types
+program and to a program which represents the abstracted behavioral
+types.
 
 \begin{figure}[!hbp]
 \centering \includegraphics[width=0.5\textwidth]{exp.png}
@@ -272,8 +272,8 @@ types
 \end{figure}
 
 In Figure~\ref{figexp}, the result of verification \texttt{Success}
-and \texttt{Fail} represent a program is memory-leak free and not
-respectively. It shows that our behavioral type system is too
+and \texttt{Fail} represent a program is totally memory-leak free and
+not respectively. It shows that our behavioral type system is too
 imprecise to verify total memory-leak freedom of the programs. The
 reason is that our method is not path-sensitive. Figure~\ref{ex:fail}
 shows this situation.
@@ -293,11 +293,11 @@ while (...) {
 \label{ex:fail}
 \end{figure}
 
-The program above is memory-leak free if the condition \(c\) is not
-changed between allocation and deallocation primitives. However, the
-abstracted behavioral type of the program is
+The program above is totally memory-leak free if the condition \(c\) is
+not changed between allocation and deallocation primitives. However,
+the abstracted behavioral type of the program is
 \(\mu\alpha. (\mathbf{0} + \Malloc); (\mathbf{0} + \Free); \alpha\),
-which is not enough to verify memory-leak freedom.
+which is not enough to verify total memory-leak freedom.
 
 We have checked many of source codes from Github and Linux kernel and
 found that extending our behavioral type system with dependencies is
@@ -314,7 +314,7 @@ useful for our future work.
 \label{ex:beh}
 \end{figure}
 
-Figure~\ref{ex:beh} shows the extension of current behavioral type
+Figure~\ref{ex:beh} shows the extension of our behavioral type
 system with dependent types. This dependent type is the behavior of a
 program which has conditional branches. By using this dependent type,
 the behavioral type of program in Figure~\ref{ex:fail} is
@@ -350,10 +350,10 @@ programs with allocation and deallocation. Although we omit the
 statement and proofs, we have proved the type soundness and have
 conducted experiments to check feasibility of our approach.
 
-The allocation primitives defined in our type system ignore the size
-of the allocated block, only including the information about the
-number and order of allocations and deallocations.  Hence, our
-approach may see a memory-leak program as a well-typed one.
+The manual memory management primitives defined in our type system
+ignore the size of the allocated block, only including the information
+about the number and order of allocations and deallocations.  Hence,
+our approach may see a memory-leak program as a well-typed one.
 Variable-length cells will be included in our future work. For
 preciseness, we are going to extend our type system with dependencies,
 because our approach is not enough to check total memory-leak freedom.
