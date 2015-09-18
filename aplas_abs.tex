@@ -350,13 +350,14 @@ programs with allocation and deallocation. Although we omit the
 statement and proofs, we have proved the type soundness and have
 conducted experiments to check feasibility of our approach.
 
-The manual memory management primitives defined in our type system
-ignore the size of the allocated block, only including the information
-about the number and order of allocations and deallocations.  Hence,
-our approach may see a memory-leak program as a well-typed one.
-Variable-length cells will be included in our future work. For
-preciseness, we are going to extend our type system with dependencies,
-because our approach is not enough to check total memory-leak freedom.
+Manual memory management primitives defined in our type system ignore
+the size of the allocated block and abstracted behavioral types only
+include the information about the number and order of allocations and
+deallocations.  Hence, our approach may see a memory-leak program as a
+well-typed one.  Variable-length cells will be included in our future
+work. For preciseness, we are going to extend our type system with
+dependencies, because our approach is not enough to check total
+memory-leak freedom.
 
 
 \bibliographystyle{abbrvnat} \bibliography{tan}
